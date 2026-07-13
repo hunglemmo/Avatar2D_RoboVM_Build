@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-13 # Bắt buộc chạy trên máy ảo macOS để sử dụng Xcode SDK
+    runs-on: macos-latest # Bắt buộc chạy trên máy ảo macOS để sử dụng Xcode SDK
 
     steps:
     - name: Checkout mã nguồn

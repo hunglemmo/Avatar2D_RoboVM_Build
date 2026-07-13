@@ -5,17 +5,17 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14 # Bắt buộc chạy trên máy ảo macOS để sử dụng Xcode SDK
+    runs-on: macos-latest # Sử dụng hệ máy ảo Mac mới nhất để chạy ngay lập tức
 
     steps:
     - name: Checkout mã nguồn
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4 # Nâng cấp lên v4
 
     - name: Thiết lập Java Runtimes
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4 # Nâng cấp lên v4
       with:
         distribution: 'zulu'
-        java-version: '11' # RoboVM chạy ổn định nhất trên Java 11
+        java-version: '11'
 
     - name: Cấp quyền cho Gradle
       run: chmod +x gradlew || true
@@ -32,7 +32,7 @@ jobs:
         zip -r ../../IOSLauncher_Chuan.ipa Payload
         
     - name: Đẩy file IPA lên mục Artifacts để tải về
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4 # ĐÃ NÂNG CẤP LÊN V4 - SỬA LỖI BỊ CHẶN
       with:
         name: IOSLauncher-Clean-Build
         path: IOSLauncher_Chuan.ipa

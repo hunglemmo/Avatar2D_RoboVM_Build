@@ -1,0 +1,8 @@
+<robovm>
+  <executableName>IOSLauncher</executableName>
+  <mainClass>YOUR_MAIN_CLASS_HERE</mainClass>
+  <os>ios</os>
+  <arch>thumb64</arch>
+  <iosSignIdentity>iPhone Developer</iosSignIdentity>
+  <iosProvisioningProfile>automatic</iosProvisioningProfile>
+</robovm>

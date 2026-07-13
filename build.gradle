@@ -4,14 +4,13 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        // Chỉ định rõ ràng đường dẫn tải plugin RoboVM từ Maven Central
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
     }
 }
 
 // Áp dụng các plugin vào dự án
 apply plugin: 'java'
-apply plugin: 'com.mobidevelop.robovm'
+apply plugin: 'robovm' // ĐÃ SỬA: Đổi từ 'com.mobidevelop.robovm' thành 'robovm' ngắn gọn
 
 repositories {
     mavenCentral()

@@ -10,14 +10,14 @@ buildscript {
 
 // Áp dụng các plugin vào dự án
 apply plugin: 'java'
-apply plugin: 'robovm' // ĐÃ SỬA: Đổi từ 'com.mobidevelop.robovm' thành 'robovm' ngắn gọn
+apply plugin: 'robovm'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    // Nạp file jar của chủ tịch vào dự án
+    // Nạp file jar sạch của chủ tịch vào dự án
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
@@ -25,5 +25,5 @@ robovm {
     iosSignIdentity = ""
     iosProvisioningProfile = ""
     iosSkipSigning = true // Bỏ qua ký mã trên GitHub
-    mainClass = "com.teamobi.avatar.AvatarLM" // Tên Main-Class của game
+    // ĐÃ XÓA dòng mainClass thừa ở đây để hệ thống tự động đọc từ file robovm.xml
 }

@@ -16,14 +16,10 @@ repositories {
 }
 
 dependencies {
-    // ĐÃ ĐỔI: Sử dụng gói J2ME API chuẩn có sẵn 100% trên Maven Central
     implementation 'org.microemu:microemulator:2.0.4'
-    
-    // Nạp file jar sạch của chủ tịch
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-// Lệnh tự động giải nén file JAR
 task unpackJar(type: Copy) {
     from {
         fileTree(dir: 'libs', include: ['*.jar']).collect { zipTree(it) }
@@ -37,4 +33,7 @@ robovm {
     iosSignIdentity = ""
     iosProvisioningProfile = ""
     iosSkipSigning = true 
+    
+    // LỆNH TỐI THƯỢNG: Ép RoboVM bỏ qua các lớp phantom âm thanh để không bị crash nửa chừng
+    ignoreBrokenClasspathWarnings = true 
 }

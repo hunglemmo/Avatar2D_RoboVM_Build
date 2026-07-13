@@ -16,10 +16,14 @@ repositories {
 }
 
 dependencies {
+    // Thư viện bridge J2ME cho các lớp microedition phantom
     implementation 'org.microemu:microemulator:2.0.4'
+    
+    // Nạp file jar của chủ tịch
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
+// Tuyệt chiêu giải nén JAR vẫn giữ nguyên
 task unpackJar(type: Copy) {
     from {
         fileTree(dir: 'libs', include: ['*.jar']).collect { zipTree(it) }
@@ -27,13 +31,13 @@ task unpackJar(type: Copy) {
     into file("${buildDir}/classes/java/main")
 }
 
+// Bắt buộc hệ thống phải giải nén xong trước khi chạy các bước tiếp theo
 classes.dependsOn unpackJar
 
 robovm {
     iosSignIdentity = ""
     iosProvisioningProfile = ""
-    iosSkipSigning = true 
+    iosSkipSigning = true // Bỏ qua ký mã trên GitHub
     
-    // LỆNH TỐI THƯỢNG: Ép RoboVM bỏ qua các lớp phantom âm thanh để không bị crash nửa chừng
-    ignoreBrokenClasspathWarnings = true 
+    // *Đã XÓA dòng 'ignoreBrokenClasspathWarnings = true' thừa để sửa lỗi configuration*
 }

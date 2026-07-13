@@ -5,17 +5,17 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest # Sử dụng hệ máy ảo Mac mới nhất để chạy ngay lập tức
+    runs-on: macos-latest # Sử dụng hệ máy ảo Mac mới nhất
 
     steps:
     - name: Checkout mã nguồn
-      uses: actions/checkout@v4 # Nâng cấp lên v4
+      uses: actions/checkout@v4
 
     - name: Thiết lập Java Runtimes
-      uses: actions/setup-java@v4 # Nâng cấp lên v4
+      uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
-        java-version: '11'
+        java-version: '17' # ĐÃ SỬA TỪ 11 THÀNH 17 ĐỂ KHỚP VỚI YÊU CẦU CỦA GRADLE
 
     - name: Cấp quyền cho Gradle
       run: chmod +x gradlew || true
@@ -32,7 +32,7 @@ jobs:
         zip -r ../../IOSLauncher_Chuan.ipa Payload
         
     - name: Đẩy file IPA lên mục Artifacts để tải về
-      uses: actions/upload-artifact@v4 # ĐÃ NÂNG CẤP LÊN V4 - SỬA LỖI BỊ CHẶN
+      uses: actions/upload-artifact@v4
       with:
         name: IOSLauncher-Clean-Build
         path: IOSLauncher_Chuan.ipa

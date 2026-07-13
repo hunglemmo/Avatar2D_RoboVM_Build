@@ -1,29 +1,30 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
-    }
-}
+name: Build iOS App
 
-// Áp dụng các plugin vào dự án
-apply plugin: 'java'
-apply plugin: 'robovm'
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: 
 
-repositories {
-    mavenCentral()
-}
+jobs:
+  build:
+    runs-on: macos-latest
 
-dependencies {
-    // Nạp file jar sạch của chủ tịch vào dự án
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 
 
-robovm {
-    iosSignIdentity = ""
-    iosProvisioningProfile = ""
-    iosSkipSigning = true // Bỏ qua ký mã trên GitHub
-    // ĐÃ XÓA dòng mainClass thừa ở đây để hệ thống tự động đọc từ file robovm.xml
-}
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4 
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # Đổi sang lệnh chuẩn của RoboVM để xuất thư mục ứng dụng
+    - name: Build iOS App with RoboVM
+      run: gradle robovmInstall
+      
+    - name: Upload IPA Artifact
+      uses: actions/upload-artifact@v4 
+      with:
+        name: IOSLauncher-App
+        path: build/robovm/IOSLauncher.app/

@@ -4,7 +4,6 @@ buildscript {
         google()
     }
     dependencies {
-        // Đã sửa lại ĐÚNG tên định danh máy chủ chuẩn của RoboVM
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
     }
 }
@@ -17,10 +16,7 @@ repositories {
 }
 
 dependencies {
+    // Đọc ruột từ file JAR của bạn
     implementation files('libs/Avatar2d_AutoFull4.jar')
 }
-
-robovm {
-    executableName = "IOSLauncher"
-    mainClass = "hero.class2" 
-}
+// Đã xóa hoàn toàn khối robovm {} thừa thãi gây lỗi. Hệ thống sẽ tự động gọi file robovm.xml để lấy thông tin.

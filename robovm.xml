@@ -1,8 +1,7 @@
 <robovm>
-  <executableName>IOSLauncher</executableName>
   <mainClass>hero.class2</mainClass>
   <os>ios</os>
-  <arch>thumb64</arch>
-  <iosSignIdentity>iPhone Developer</iosSignIdentity>
-  <iosProvisioningProfile>automatic</iosProvisioningProfile>
+  <archs>
+    <arch>thumb64</arch>
+  </archs>
 </robovm>

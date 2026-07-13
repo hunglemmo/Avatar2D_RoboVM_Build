@@ -1,22 +1,20 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-    }
-    dependencies {
-        classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
-    }
+plugins {
+    id 'java'
+    id 'com.mobidevelop.robovm' version '2.3.20'
 }
-
-apply plugin: 'java'
-apply plugin: 'robovm'
 
 repositories {
     mavenCentral()
+    google()
 }
 
 dependencies {
-    // Đọc ruột từ file JAR của bạn
+    // Chỉ định chính xác phôi file JAR của bạn
     implementation files('libs/Avatar2d_AutoFull4.jar')
 }
-// Đã xóa hoàn toàn khối robovm {} thừa thãi gây lỗi. Hệ thống sẽ tự động gọi file robovm.xml để lấy thông tin.
+
+// BẮT BUỘC CÓ: Khai báo rõ mục tiêu iOS để Gradle 8.0 tự động sinh ra lệnh robovmCreateArchive
+robovm {
+    os = "ios"
+    archs = ["thumb64"]
+}

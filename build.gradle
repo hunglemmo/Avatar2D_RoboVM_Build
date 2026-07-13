@@ -4,25 +4,18 @@ buildscript {
         google()
     }
     dependencies {
-        // Sử dụng plugin RoboVM để dịch Java sang mã máy iOS
-        classpath 'io.github.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
+        classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
     }
 }
 
-apply plugin: 'io.github.mobidevelop.robovm'
+apply plugin: 'java'
+apply plugin: 'robovm'
 
 repositories {
     mavenCentral()
+    google()
 }
 
 dependencies {
-    // Nạp file JAR của bạn làm tài nguyên cốt lõi
     implementation files('libs/Avatar2d_AutoFull4.jar')
-}
-
-robovm {
-    // Cấu hình tên file chạy xuất ra
-    executableName = "IOSLauncher"
-    // DÁN CÁI MAIN-CLASS BẠN TÌM ĐƯỢC Ở BƯỚC 1 VÀO ĐÂY (Thay thế dòng dưới)
-    mainClass = "hero.class2" 
 }

@@ -1,0 +1,38 @@
+name: Build RoboVM IPA
+
+on:
+  workflow_dispatch: # Kích hoạt bằng tay trên giao diện web GitHub
+
+jobs:
+  build:
+    runs-on: macos-13 # Bắt buộc chạy trên máy ảo macOS để sử dụng Xcode SDK
+
+    steps:
+    - name: Checkout mã nguồn
+      uses: actions/checkout@v3
+
+    - name: Thiết lập Java Runtimes
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '11' # RoboVM chạy ổn định nhất trên Java 11
+
+    - name: Cấp quyền cho Gradle
+      run: chmod +x gradlew || true
+
+    - name: Biên dịch Java JAR sang Native iOS (.app)
+      run: |
+        gradle robovmCreateArchive --no-daemon
+
+    - name: Đóng gói thành phẩm IPA sạch
+      run: |
+        mkdir -p build/deploy/Payload
+        cp -r build/robovm/IOSLauncher.app build/deploy/Payload/
+        cd build/deploy
+        zip -r ../../IOSLauncher_Chuan.ipa Payload
+        
+    - name: Đẩy file IPA lên mục Artifacts để tải về
+      uses: actions/upload-artifact@v3
+      with:
+        name: IOSLauncher-Clean-Build
+        path: IOSLauncher_Chuan.ipa

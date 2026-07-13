@@ -1,7 +1,17 @@
-plugins {
-    id 'java'
-    id 'robovm' version '2.3.20' // Hoặc phiên bản RoboVM chủ tịch đang dùng
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        // Chỉ định rõ ràng đường dẫn tải plugin RoboVM từ Maven Central
+        classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
+    }
 }
+
+// Áp dụng các plugin vào dự án
+apply plugin: 'java'
+apply plugin: 'com.mobidevelop.robovm'
 
 repositories {
     mavenCentral()
@@ -15,6 +25,6 @@ dependencies {
 robovm {
     iosSignIdentity = ""
     iosProvisioningProfile = ""
-    iosSkipSigning = true // Bỏ qua ký mã trên GitHub, về máy mình dùng ESign sau
-    mainClass = "com.teamobi.avatar.AvatarLM" // CHÚ Ý: Thay bằng đường dẫn Main-Class chính xác trong file jar của chủ tịch
+    iosSkipSigning = true // Bỏ qua ký mã trên GitHub
+    mainClass = "com.teamobi.avatar.AvatarLM" // Tên Main-Class của game
 }

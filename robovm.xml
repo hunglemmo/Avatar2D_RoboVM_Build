@@ -1,5 +1,7 @@
 <robovm>
-    <mainClass>com.teamobi.avatar.AvatarLM</mainClass> <!-- Trỏ đúng Main Class như trên -->
+    <!-- Đã thay bằng chìa khóa chuẩn xác 100% -->
+    <mainClass>hero.class2</mainClass> 
+    
     <executableName>IOSLauncher</executableName>
     <iosInfoPList>Info.plist</iosInfoPList>
 </robovm>

@@ -16,15 +16,14 @@ repositories {
 }
 
 dependencies {
-    // ĐÂY LÀ ĐOẠN MÃ QUAN TRỌNG NHẤT: Tiêm thư viện J2ME giả lập
-    // để RoboVM giải quyết các lớp phantom.
-    implementation 'com.github.microemulator:microemulator-core:3.0.0'
+    // ĐÃ ĐỔI: Sử dụng gói J2ME API chuẩn có sẵn 100% trên Maven Central
+    implementation 'org.microemu:microemulator:2.0.4'
     
-    // Nạp file jar của chủ tịch
+    // Nạp file jar sạch của chủ tịch
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-// Tuyệt chiêu giải nén JAR vẫn giữ nguyên
+// Lệnh tự động giải nén file JAR
 task unpackJar(type: Copy) {
     from {
         fileTree(dir: 'libs', include: ['*.jar']).collect { zipTree(it) }
@@ -32,11 +31,10 @@ task unpackJar(type: Copy) {
     into file("${buildDir}/classes/java/main")
 }
 
-// Ràng buộc hệ thống giải nén trước khi chạy
 classes.dependsOn unpackJar
 
 robovm {
     iosSignIdentity = ""
     iosProvisioningProfile = ""
-    iosSkipSigning = true // Bỏ qua ký mã trên GitHub
+    iosSkipSigning = true 
 }

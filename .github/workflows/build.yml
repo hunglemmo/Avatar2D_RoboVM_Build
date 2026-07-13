@@ -17,7 +17,6 @@ jobs:
         distribution: 'zulu'
         java-version: '17'
 
-    # BƯỚC CỐT LÕI: Ép máy ảo dùng Gradle 8.0 để sửa lỗi "Task not found"
     - name: Thiết lập Gradle tương thích
       uses: gradle/actions/setup-gradle@v4
       with:
@@ -26,14 +25,15 @@ jobs:
     - name: Cấp quyền cho Gradle
       run: chmod +x gradlew || true
 
-    - name: Biên dịch Java JAR sang Native iOS (.app)
+    - name: Biên dịch Java JAR sang Native iOS
       run: |
-        gradle robovmCreateArchive --no-daemon
+        gradle robovmArchive --no-daemon
 
     - name: Đóng gói thành phẩm IPA sạch
       run: |
         mkdir -p build/deploy/Payload
-        cp -r build/robovm/IOSLauncher.app build/deploy/Payload/
+        # Lệnh quét thông minh: Tự động tìm thư mục .app trong build và gom vào Payload
+        find build -name "*.app" -type d -exec cp -r {} build/deploy/Payload/ \;
         cd build/deploy
         zip -r ../../IOSLauncher_Chuan.ipa Payload
         

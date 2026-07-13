@@ -1,7 +1,5 @@
 <robovm>
   <mainClass>hero.class2</mainClass>
   <os>ios</os>
-  <archs>
-    <arch>thumb64</arch>
-  </archs>
+  <arch>thumb64</arch>
 </robovm>

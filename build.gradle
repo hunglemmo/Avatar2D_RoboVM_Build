@@ -4,7 +4,6 @@ buildscript {
         google()
     }
     dependencies {
-        // Tải bộ công cụ RoboVM trực tiếp từ kho Central
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.20'
     }
 }
@@ -18,11 +17,9 @@ repositories {
 }
 
 dependencies {
-    // Chỉ định phôi file JAR của bạn
     implementation files('libs/Avatar2d_AutoFull4.jar')
 }
 
-// Trỏ thẳng cấu hình tới file robovm.xml chuẩn của bạn
 robovm {
     configFile = file('robovm.xml')
 }

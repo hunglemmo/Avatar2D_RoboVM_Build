@@ -1,11 +1,11 @@
 name: Build RoboVM IPA
 
 on:
-  workflow_dispatch: # Kích hoạt bằng tay trên giao diện web GitHub
+  workflow_dispatch: 
 
 jobs:
   build:
-    runs-on: macos-latest # Sử dụng hệ máy ảo Mac mới nhất
+    runs-on: macos-latest 
 
     steps:
     - name: Checkout mã nguồn
@@ -15,7 +15,13 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
-        java-version: '17' # ĐÃ SỬA TỪ 11 THÀNH 17 ĐỂ KHỚP VỚI YÊU CẦU CỦA GRADLE
+        java-version: '17'
+
+    # BƯỚC CỐT LÕI: Ép máy ảo dùng Gradle 8.0 để sửa lỗi "Task not found"
+    - name: Thiết lập Gradle tương thích
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.0'
 
     - name: Cấp quyền cho Gradle
       run: chmod +x gradlew || true

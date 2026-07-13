@@ -20,6 +20,9 @@ dependencies {
     implementation files('libs/Avatar2d_AutoFull4.jar')
 }
 
+// Cấu hình trực tiếp tại đây để bỏ qua hoàn toàn file robovm.xml gây lỗi
 robovm {
-    configFile = file('robovm.xml')
+    mainClass = "hero.class2"
+    os = "ios"
+    archs = ["thumb64"]
 }
